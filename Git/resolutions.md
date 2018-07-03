@@ -11,3 +11,5 @@
 4）OK，完工。git status查看下。
 
 ## Changes not staged for commit
+
+## fatal: refusing to merge unrelated histories

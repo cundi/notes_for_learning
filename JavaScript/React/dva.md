@@ -191,6 +191,16 @@ dispatch({ type: actionType, payload: attachedData, error: errorIfHave});
 const result = yield call(api.fetch, { page: 1 });
 ```
 
+yield all 用于并行发起多个请求
+
+```js
+const results = yield all([
+  call(a),
+  call(b),
+]);
+yield put(actionWithResults);
+```
+
 - select(function):
 
 从全局状态中选择数据
@@ -200,3 +210,16 @@ const count = yield select(state => state.count);
 ```
 
 5. Subscription: 用于订阅一个数据源，格式为 ({ dispatch, history }) => unsubscribe ，　会根据需要 dispatch 相应的 action。在 app.start() 时被执行，数据源可以是当前的时间、当前页面的url、服务器的 websocket 连接、history 路由变化等等。
+
+```jsx
+import key from 'keymaster';
+...
+app.model({
+  namespace: 'count',
+  subscriptions: {
+    keyEvent(dispatch) {
+      key('⌘+up, ctrl+up', () => { dispatch({type:'add'}) });
+    },
+  }
+});
+```

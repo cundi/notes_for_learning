@@ -69,65 +69,6 @@ loop.run_until_complete(print_sum(1, 2))
 loop.close()
 ```
 
-## Future
-
-```python
-asyncio.Future(*, loop=None)
-```
-
-- 该类几乎完全兼容于　`concurrent.futures.Future`
-- 该类不是线程安全的
-
-区别：
-
-result() and exception() do not take a timeout argument and raise an exception when the future isn’t done yet.
-Callbacks registered with add_done_callback() are always called via the event loop’s call_soon_threadsafe().
-This class is not compatible with the wait() and as_completed() functions in the concurrent.futures package.
-
-示例：
-
-- 使用run_until_complete()方法的Future
-
-```python
-import asyncio
-
-async def slow_operation(future):
-    await asyncio.sleep(1)
-    future.set_result('Future is done!')
-
-loop = asyncio.get_event_loop()
-future = asyncio.Future()
-asyncio.ensure_future(slow_operation(future))
-loop.run_until_complete(future)
-print(future.result())
-loop.close()
-```
-
-协程函数负责计算，并将结果存储在Future中，
-
-- 使用run_forever()方法和Future
-
-```python
-import asyncio
-
-async def slow_operation(future):
-    await asyncio.sleep(1)
-    future.set_result('Future is done!')
-
-def got_result(future):
-    print(future.result())
-    loop.stop()
-
-loop = asyncio.get_event_loop()
-future = asyncio.Future()
-asyncio.ensure_future(slow_operation(future))
-future.add_done_callback(got_result)
-try:
-    loop.run_forever()
-finally:
-    loop.close()
-```
-
 ## Task
 
 ```python

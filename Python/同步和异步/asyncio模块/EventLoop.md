@@ -270,8 +270,99 @@ loop.subprocess_shell(protocol_factory, cmd, *, stdin=subprocess.PIPE, stdout=su
 ## Server对象
 
 - Server对象可以使用函数　loop.create_server(), loop.create_unix_server(), start_server(), and start_unix_server() 创建，不要直接初始化asyncio.Server。
-
 - Server对象是异步的上下文管理器。
+- 在`async with`语句完成后，它能够保证server对象的关闭并再接收新的连接。
+
+```python
+srv = await loop.create_server(...)
+
+async with srv:
+    # some code
+
+# At this point, srv is closed and no longer accepts new connections.
+```
+
+类`asyncio.Server`支持以下方法：
+
+```python
+close()
+
+get_loop()
+
+start_serving()
+```
+
+```python
+serve_forever()
+"""
+:return: 协程对象
+
+１．开始接受连接直到协程被结束。
+２．每个Server对象仅可以运行一次`serve_forever`
+"""
+
+async def client_connected(reader, writer):
+    # Communicate with the client with
+    # reader/writer streams.  For example:
+    await reader.readline()
+
+async def main(host, port):
+    srv = await asyncio.start_server(
+        client_connected, host, port)
+    await srv.serve_forever()
+
+asyncio.run(main('127.0.0.1', 0))
+```
+
+```python
+is_serving()
+```
+
+```python
+wait_closed()
+```
+
+```python
+sockets()
+```
+
+## 事件循环的实现
+
+asyncio模块有两种事件循环的实现，即类`asyncio.SelectorEventLoop`和`asyncio.ProactorEventLoop`。
+默认在所有操作系统上使用SelectorEventLoop。
+
+- asyncio.SelectorEventLoop：
+
+    基于`selectors`模块的事件循环
+    可以针对不同的操作系统选择使用最适合的selector
+    适用OS: Unix,Windows
+
+    ```python
+    import asyncio
+    import selectors
+
+    selector = selectors.SelectSelector()
+    loop = asyncio.SelectorEventLoop(selector)
+    asyncio.set_event_loop(loop)
+    ```
+
+- asyncio.ProactorEventLoop
+
+    Windows系统上使用“I/O完成端口”的事件循环
+    适用OS: Windows
+
+    ```python
+    import asyncio
+    import sys
+
+    if sys.platform == 'win32':
+        loop = asyncio.ProactorEventLoop()
+        asyncio.set_event_loop(loop)
+    ```
+
+- asyncio.AbstractEventLoop
+
+    服务asyncio事件循环的抽象基类
 
 ## 示例
 

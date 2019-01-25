@@ -8,10 +8,78 @@
 
 ## 介绍
 
-- 在最高层面，transport只关心如何（how）传输字节，而protocol确定要传输多少(which)字节。
+- 在最高层面，transport只关心如何（how）传输字节，而protocol确定要传输哪些(which)字节。
 - 殊途同归：transport是对socket的抽象，而从传输的视角来看，protocol则是对应用的抽象。
 - 从另外一个角度来说，transport 和 protocol 共同定义了调用网络I/O和内部进程I/O的抽象接口。
 - transport 和 protocol对象之间存在这１对１的协作关系：protocol调用transport方法发送数据，而transport调用protocol方法去传递收到的数据。
+
+## Transports
+
+- transport不是线程安全的
+- tranport
+
+### Transport的方法继承关系
+
+```python
+asyncio.BaseTransport
+
+"""
+"""
+```
+
+```python
+asyncio.WriteTransport
+
+"""
+"""
+```
+
+```python
+asyncio.ReadTransport
+
+"""
+"""
+```
+
+```python
+asyncio.Transport(WriteTransport, ReadTransport)
+
+"""
+1. 表示双向传输接口，比如TCP连接。
+2. 用户不需要直接初始化transport。相仿，用户应该调实用函数传递到protocal工厂，和其他必要的信息创建transport和protocol。
+"""
+```
+
+```python
+asyncio.DatagramTransport(BaseTransport)
+
+"""
+:return: 该类的实例，由事件循环实例的方法`loop.create_datagram_endpoint()`返回。
+"""
+```
+
+```python
+asyncio.SubprocessTransport(BaseTransport)
+
+"""
+:return: 该类的实例，由事件循环的方法`loop.subprocess_shell()`和`loop.subprocess_exec()`返回。
+"""
+```
+
+### BaseTransport的类方法
+
+### 只读Transport
+
+### 只写Transport
+
+### 数据报文 Transport
+
+### 子进程 Transport
+
+## Protocol
+
+- asyncio模块提供了一组用来实现网络协议的抽象基类。这些类要配合transport一起使用。
+- 抽象基础protocoal类的子类实现了部分或者全部方法。这些方法都是回调风格的：
 
 ## 示例
 

@@ -2,7 +2,18 @@
 
 ## Coroutines
 
+协程的部分详情参考PEP492。
+
 示例：
+
+```python
+# Python 3.4 coroutine example
+import asyncio
+
+@asyncio.coroutine
+def my_coro():
+    yield from func()
+```
 
 ```python
 # 3.5

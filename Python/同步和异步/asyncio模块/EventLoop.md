@@ -205,6 +205,7 @@ def cpu_bound():
     # process pool.
     return sum(i * i for i in range(10 ** 7))
 
+
 async def main():
     loop = asyncio.get_running_loop()
 
@@ -215,13 +216,13 @@ async def main():
         None, blocking_io)
     print('default thread pool', result)
 
-    # 2. Run in a custom thread pool:
+    # 2. 运行在自定义线程池中:
     with concurrent.futures.ThreadPoolExecutor() as pool:
         result = await loop.run_in_executor(
             pool, blocking_io)
         print('custom thread pool', result)
 
-    # 3. Run in a custom process pool:
+    # 3. 运行在自定进程池中:
     with concurrent.futures.ProcessPoolExecutor() as pool:
         result = await loop.run_in_executor(
             pool, cpu_bound)

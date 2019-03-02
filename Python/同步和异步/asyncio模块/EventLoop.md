@@ -266,6 +266,21 @@ loop.subprocess_shell(protocol_factory, cmd, *, stdin=subprocess.PIPE, stdout=su
 """
 ```
 
+- 多个Future的组合，放到一个事件循环中
+
+```python
+futus = [asyncio.ensure_future(do_some_work(1)),
+             asyncio.ensure_future(do_some_work(3))]
+
+loop.run_until_complete(asyncio.gather(*futus))
+```
+
+- 在一个事件循环中运行多个协程
+
+```python
+loop.run_until_complete(asyncio.gather(do_some_work(1), do_some_work(3)))
+```
+
 ## 回调处理
 
 ## Server对象

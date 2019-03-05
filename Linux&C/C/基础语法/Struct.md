@@ -6,12 +6,12 @@
 声明：
 
 ```c
-struct student   /*definition of structure*/
+struct student   /*结构体定义*/
 {
-    int roll;                                          /*members*/
+    int roll;                                          /*结构体成员*/
     char name [10];
     float per;
-}s1,s2;                            /*objects or variables of the structure student*/
+}s1,s2;                            /*结构体student的变量/对象*/
 ```
 
 使用：

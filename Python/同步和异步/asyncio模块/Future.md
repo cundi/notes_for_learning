@@ -1,11 +1,41 @@
 # Future
 
+用途：Future对象用来桥接 `低级的基于回调代码`和高级async/await代码。
+
 ## Future函数
+
+```python
+# New in version 3.5.
+asyncio.isfuture(obj)
+```
+
+```python
+asyncio.ensure_future(obj, *, loop=None)
+
+"""
+返回三种： 
+
+1. 如果obj是Future，返回Future；Task对象，则返回`类Future` 对象
+2. 如果obj是协程（通过asyncio.iscoroutine判断），则包装为
+3. 如果obj是awaitable（通过inspect.isawaitable()判断），则
+
+4. 如果obj不是以上三种类型，则抛出 TypeError。
+"""
+```
+
+```python
+asyncio.wrap_future(future, *, loop=None
+
+"""
+将concurrent.futures.Future对象包装为 asyncio.Future 对象
+"""
+```
 
 ## Future对象
 
 ```python
 asyncio.Future(*, loop=None)
+
 ```
 
 - Future表示最终的异步操作结果
@@ -14,7 +44,7 @@ asyncio.Future(*, loop=None)
 - Future是awaitable对象。协程可以等待Future对象
 - 通常Future被用于低级的回调风格代码（比如，）
 
-Ｆuture对象的设计模仿了`concurrent.futures.Future`，其区别在于：
+asyncio的Future对象设计模仿了`concurrent.futures.Future`，其区别在于：
 
 1. 和asyncio的Future不同，`concurrent.futures.Future`的实例不可以用在`await`表达式上。
 2. `asyncio.Future.result()`和`asyncio.Future.exception()`不接受`timeout`参数。
@@ -64,4 +94,36 @@ try:
     loop.run_forever()
 finally:
     loop.close()
+```
+
+### Future对象的方法
+
+```python
+result()
+
+"""
+"""
+```
+
+set_result(result)
+
+set_exception(exception)
+
+```python
+done()
+```
+
+```python
+cancelled()
+
+"""
+"""
+```
+
+```python
+add_done_callbakc(callback, *, context=None)
+
+"""
+
+"""
 ```

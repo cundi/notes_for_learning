@@ -19,7 +19,9 @@
 
 6. 修改`installer/roles/local_docker/tasks/standalone.yml`中的`{{ awx_web_docker_actual_image }}`和`{{ awx_task_docker_actual_image }}`为`ansible/axw_web:2.1.2`、`ansible/awx_task:2.1.2`。
 
-7. 返回awx的安装目录，即`awx-2.1.2/installer`，然后用下面的命令来执行指定的task。
+7. postgres数据持久化，修改installer文件夹下的iventory的`postgres_data_dir`。
+
+8. 返回awx的安装目录，即`awx-2.1.2/installer`，然后用下面的命令来执行指定的task。
 
     ```shell
     ansible-playbook -vvv --step --start-at-task="Activate AWX web container" -i ./inventory install.yml

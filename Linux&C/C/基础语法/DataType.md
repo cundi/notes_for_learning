@@ -23,3 +23,23 @@ double|Decimal Number with more precision|double speed_of_swallow = 0.01072896;|
 - 函数返回void
 - void作为函数参数
 - 
+
+## 示例
+
+- 各数据类型所需的字节大小
+
+```c
+/*
+sizeof.c
+*/
+#include <stdio.h>
+
+int main(void)
+{
+    printf("\nA char is %d bytes", sizeof(char));
+    printf("\nA int is %d bytes", sizeof(int));
+    printf("\nA short is %d bytes", sizeof(short));
+
+    return 0;
+}
+```

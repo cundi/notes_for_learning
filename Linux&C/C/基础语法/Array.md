@@ -58,9 +58,52 @@ void main()
 }
 ```
 
+不指定数组大小
+
+```c
+int array[] = { 100, 200, 300, 400 };
+```
+
+指定大小
+
+```c
+int array[4] = { 100, 200, 300, 400 };
+```
+
+部分初始化
+
+```c
+int array[10] = { 1, 2, 3 };
+```
+
 ## Two dimensional Arrays 二位数组
 
 C language supports multidimensional arrays also. The simplest form of a multidimensional array is the two-dimensional array. Both the row's and column's index begins from 0.
 
 C语言支持多维数组，最简单的多维数组是二维数组。
 
+
+```c
+int array[4][3] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+```
+
+```c
+int array[4][3] = { { 1, 2, 3 } , { 4, 5, 6 } , { 7, 8, 9 } , { 10, 11, 12 } };
+```
+
+```c
+/*
+arraysize.c 比较默认数据类型和所对应数组所占字节的不同 
+*/
+#include <stdio.h>
+
+/* 声明多个含有100个元素对数组 */
+int intarray[100];
+float floatarray[100];
+double doublearray[100];
+
+int main(void)
+{
+
+}
+```

@@ -1,8 +1,76 @@
 # Pointer
 
+## 指针与简单变量
+
+```c
+/* ptr.c 指针的基本使用 */
+#include <stdio.h>
+
+int var = 1;
+
+int *ptr;
+
+int main(void)
+{
+    ptr = &var;
+
+    /* 直接访问和间接访问 */
+    printf("\nDirect access, var = %d", var);
+    printf("\nIndirect access, var = %d", *ptr);
+
+    /* 显示变量var内存地址的两种方法 */
+    printf("\n\nThe address of var = %p", &var);
+    printf("\nThe address of var = %p", ptr);
+    
+    return 0;
+}
+```
+
+## 指针与变量类型
+
+## 指针与数组
+
+数组下标和指针的关系：
+
+```c
+*(array) == array[0] 
+*(array + 1) == array[1] 
+*(array + 2) == array[2]
+```
+
+```c
+/* passing.c 将数组传递到函数 */
+#include <stdio.h>
+
+#define MAX 10
+
+int array[MAX], count;
+
+int largest(int num_array[], int length);
+
+int main(void)
+{
+    for (count = 0; count < MAX; count++)
+    {
+        printf("Enter an integer value: ");
+        scanf("%p", &array[count]);
+    }
+
+    printf("\n\nLargest value = %d\n", largest(array, MAX));
+
+    return 0
+}
+
+int largest(int num_array[], int length)
+{
+    int count, biggest = -12000;
+    for ()
+}
+```
+
 ## Demonstrating the & and * Operators
 
-## C中的空指针
+## 空指针
 
 定义：没有关联数据类型的指针就是空指针
 
@@ -76,3 +144,5 @@ int main()
     return 0;
 }
 ```
+
+## 常见错误

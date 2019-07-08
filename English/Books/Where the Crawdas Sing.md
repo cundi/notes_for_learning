@@ -4,7 +4,7 @@
 
 When you’re old enough you’ll understand.
 
-Kya <u>`felt sick` to her stomach</u>. 
+Kya <u>`felt sick` to her stomach</u>.
 
 Kya <u>`dashed from` the store</u> and <u>walked `as fast as` she could</u> toward the marsh track. 
 

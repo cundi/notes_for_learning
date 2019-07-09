@@ -233,7 +233,7 @@ return 0;
 
 ## 函数指针
 
-与普通指向相比较：
+与普通指针相比较：
 
 1. 函数指针指向的是代码而不是数值。通常函数指针存储可执行代码的开始部分。
 2. 函数指针不会“分配”和“重新分配”内存。
@@ -245,19 +245,20 @@ return 0;
 
 ```c
 // 移除 & 内存地址运算符，然后调用fun_ptr也掉了 * ，程序也正常运行
-#include <stdio.h> 
-void fun(int a) 
-{ 
-	printf("Value of a is %d\n", a); 
-} 
+#include <stdio.h>
 
-int main() 
-{ 
-	void (*fun_ptr)(int) = fun; // & removed 
+void fun(int a)
+{
+	printf("Value of a is %d\n", a);
+}
 
-	fun_ptr(10); // * removed 
+int main()
+{
+	void (*fun_ptr)(int) = fun; // & removed
 
-	return 0; 
+	fun_ptr(10); // * removed
+
+	return 0;
 }
 ```
 
@@ -267,34 +268,34 @@ int main()
 // 选择0到2来执行不同的运算函数
 #include <stdio.h>
 
-void add(int a, int b) 
-{ 
-	printf("Addition is %d\n", a+b); 
-} 
-void subtract(int a, int b) 
-{ 
-	printf("Subtraction is %d\n", a-b); 
-} 
-void multiply(int a, int b) 
-{ 
-	printf("Multiplication is %d\n", a*b); 
-} 
+void add(int a, int b)
+{
+	printf("Addition is %d\n", a+b);
+}
+void subtract(int a, int b)
+{
+	printf("Subtraction is %d\n", a-b);
+}
+void multiply(int a, int b)
+{
+	printf("Multiplication is %d\n", a*b);
+}
 
-int main() 
-{ 
+int main()
+{
 	// fun_ptr_arr 是一个由函数指针构成的数组
-	void (*fun_ptr_arr[])(int, int) = {add, subtract, multiply}; 
-	unsigned int ch, a = 15, b = 10; 
+	void (*fun_ptr_arr[])(int, int) = {add, subtract, multiply};
+	unsigned int ch, a = 15, b = 10;
 
 	printf("Enter Choice: 0 for add, 1 for subtract and 2 "
-			"for multiply\n"); 
-	scanf("%d", &ch); 
+			"for multiply\n");
+	scanf("%d", &ch);
 
-	if (ch > 2) return 0; 
+	if (ch > 2) return 0;
 
-	(*fun_ptr_arr[ch])(a, b); 
+	(*fun_ptr_arr[ch])(a, b);
 
-	return 0; 
+	return 0;
 }
 ```
 
@@ -303,9 +304,9 @@ int main()
 错误的申明方式：
 
 ```c
-/* 
+/*
 该语句表示，接受一个整数类型参数的函数foo，返回一个整数类型的指针变量。
-因为 () 的运算优先级高于 * 
+因为 () 的运算优先级高于 *
  */
 int * foo(int);
 ```
@@ -316,19 +317,19 @@ int * foo(int);
 int (*foo)(int);
 ```
 
-###  删除指向函数的指针
+### 删除指向函数的指针
 
 ```c
-#include <stdio.h> 
-// A normal function with an int parameter 
-// and void return type 
-void fun(int a) 
-{ 
-	printf("Value of a is %d\n", a); 
-} 
+#include <stdio.h>
+// A normal function with an int parameter
+// and void return type
+void fun(int a)
+{
+	printf("Value of a is %d\n", a);
+}
 
-int main() 
-{ 
+int main()
+{
 	// fun_ptr is a pointer to function fun() 
 	void (*fun_ptr)(int) = &fun; 
 
